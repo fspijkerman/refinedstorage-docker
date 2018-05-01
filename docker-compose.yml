@@ -1,0 +1,27 @@
+version: '2.0'
+services:
+  jenkins:
+    build:
+      context: jenkins/
+    privileged: true
+    user: jenkins
+    ports:
+      - 8080:8080
+      - 50000:50000
+    container_name: jenkins
+    volumes:
+      - ./work/jenkins:/var/jenkins_home #Remember that, the tmp directory is designed to be wiped on system reboot.
+      #- /var/run/docker.sock:/var/run/docker.sock
+  slave:
+    build:
+      context: slave/
+    privileged: false
+    environment:
+      - JENKINS_URL=http://jenkins:8080
+      - JENKINS_AGENT_NAME=slave
+      - JENKINS_AGENT_WORKDIR=/home/jenkins/agent
+      - JENKINS_SECRET=${JENKINS_SECRET}
+    container_name: slave
+    restart: always
+    depends_on:
+      - jenkins
