@@ -43,6 +43,7 @@ We also need to install the following plugins:
  * embeddable-build-status
  
 Goto `Manage Jenkins > Manage Plugins`
+
 Click on the tab `Available` and select the checkboxes of the plugins required, click on `Install without restart`
 
 ### Slave Setup
