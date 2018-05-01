@@ -73,6 +73,39 @@ Edit the `.env` file and fill in the `JENKINS_SECRET` (without quotes)
 
 ### Starting and Stopping
 
+Start and detach:
+```
+cd /srv/docker
+docker-compose up -d
+```
+
+Stop:
+```
+cd /srv/docker
+docker-compose down
+```
+
+### Debugging
+
+Start in the foreground:
+```
+cd /srv/docker 
+docker-compose up
+```
+
+Attach to the logfiles:
+```
+cd /srv/docker
+docker-compose logs -f
+```
+Access a container:
+`docker-compose exec <vmname> <command>`
+ 
+```
+docker-compose exec jenkins bash
+docker-compose exec slave bash
+```
+
 ### Updating
 
 ### Backup and restore
