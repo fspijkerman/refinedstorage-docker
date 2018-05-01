@@ -67,3 +67,12 @@ Copy the secret hash from the java parameters.
 cp env-example .env
 ```
 Edit the `.env` file and fill in the `JENKINS_SECRET` (without quotes)
+
+
+## Usage
+
+### Starting and Stopping
+
+### Updating
+
+### Backup and restore
