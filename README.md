@@ -60,7 +60,7 @@ Remote root directory: /home/jenkins/agent
 ```
 Keep everything else default, press `Save`
 
-Now goto the Manage nodes page again, select slave.
+Now goto the `Manage nodes` page again, select `slave`.
 Copy the secret hash from the java parameters.
 
 ```
