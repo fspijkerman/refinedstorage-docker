@@ -25,3 +25,18 @@ services:
     restart: always
     depends_on:
       - jenkins
+  caddy:
+    build:
+      context: caddy/
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - ACME_AGREE=true
+    volumes:
+      - ./caddy/Caddyfile:/etc/Caddyfile
+      - ./work/caddy:/root/.caddy
+    container_name: caddy
+    restart: always
+    depends_on:
+      - jenkins

@@ -1,0 +1,10 @@
+http://jenkins.raoulvdberge.com {
+  redir https://jenkins.raoulvdberge.com{uri}
+}
+
+https://jenkins.raoulvdberge.com {
+  tls self_signed
+  proxy / http://jenkins:8080 {
+    transparent
+  }
+}
