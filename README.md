@@ -22,7 +22,7 @@ Checkout this git repository, any location will do.
 First we have to start jenkins and run the setup in the interface
 
 ```
-cd refiendstorage-docker
+cd refinedstorage-docker
 docker-compose up --build jenkins
 ```
 
