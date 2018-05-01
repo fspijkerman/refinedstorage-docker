@@ -35,8 +35,17 @@ Please use the following password to proceed to installation:
 
 Goto http://yourserver:8080 and follow the setup instructions (choose default recommended plugins) and create and admin account.
 
+### After steps
 After the setup is complete login into jenkins.
+We also need to install the following plugins:
 
+ * Job Cacher plugin
+ * embeddable-build-status
+ 
+Goto `Manage Jenkins > Manage Plugins`
+Click on the tab `Available` and select the checkboxes of the plugins required, click on `Install without restart`
+
+### Slave Setup
 Goto `Manage Jenkins > Manage Nodes` and click `New Node`
 
 ```
