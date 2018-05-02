@@ -68,6 +68,13 @@ cp env-example .env
 ```
 Edit the `.env` file and fill in the `JENKINS_SECRET` (without quotes)
 
+Now everything is prepared and we're able to start all the containers normally. Stop the currently running
+docker-compose by sending `^c`.
+
+Start all the containers by running:
+```
+docker-compose up -d
+```
 
 ## Usage
 
