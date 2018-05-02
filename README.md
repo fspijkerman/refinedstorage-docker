@@ -108,3 +108,53 @@ docker-compose exec slave bash
 ### Updating
 
 ### Backup and restore
+
+## Nginx configuration
+```
+server {
+  listen 80; listen [::]:80;
+  server_name jenkins.mydomain.nl;
+
+  location /.well-known/acme-challenge/ {
+    root /var/www;
+  }
+
+  location / {
+    return 301 https://$host$request_uri;
+  }
+}
+
+server {
+  listen 443 ssl http2;  listen [::]:443 ssl http2;
+  server_name jenkins.mydomain.nl;
+
+  ssl on;
+  ssl_certificate      /etc/letsencrypt/live/jenkins.mydomain.nl/fullchain.pem;
+  ssl_certificate_key  /etc/letsencrypt/live/jenkins.mydomain.nl/privkey.pem;
+
+  ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256';
+  ssl_protocols TLSv1.2;
+  ssl_prefer_server_ciphers on;
+  ssl_session_cache shared:SSL:10m;
+
+  add_header Strict-Transport-Security "max-age=63072000;";
+  ssl_stapling on;
+  ssl_stapling_verify on;
+
+  client_max_body_size 0;
+
+  location /errorpages/ {
+    alias /var/www/errorpages/;
+  }
+
+  location / {
+    error_page 502 =502 /errorpages/jenkins_offline.html;
+    proxy_intercept_errors on;
+    proxy_pass http://localhost:8080;
+    proxy_set_header Host $http_host;
+    proxy_http_version 1.1;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto https;
+  }
+}
+```
